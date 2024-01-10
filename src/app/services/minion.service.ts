@@ -74,5 +74,9 @@ export class MinionService {
 
   getFilterMinions(term: string): Minion[]{
     return this.minions.filter(minion => minion.name.toLowerCase().includes(term.toLowerCase()));
-  } 
+  }
+  
+  getMinionByName(name : string): Minion{
+    return this.minions.filter(minion=> minion.name == name)[0];
+  }
 }

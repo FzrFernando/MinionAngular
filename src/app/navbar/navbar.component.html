@@ -11,12 +11,12 @@
           <a class="nav-link" routerLink="home" routerLinkActive="active" ariaCurrentWhenActive="page">Home<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" routerLink="minions" routerLinkActive="active" ariaCurrentWhenActive="page">Minions</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0" (ngSubmit)="search()">
-        <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchTerm" (keyup)="search()">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchTerm" (keyup)="searchLink()">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" routerLink="minions/{{searchTerm}}">Search</button>
       </form>
     </div>
 </nav>

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MinionService } from '../services/minion.service';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -13,11 +13,16 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class NavbarComponent {
   @Output() onSearch : EventEmitter<string> = new EventEmitter<string>();
 
+
+
   searchTerm: string = '';
-  constructor(private minionService: MinionService){}
+  constructor(private minionService: MinionService, private router: Router){}
 
   search() {
     this.onSearch.emit(this.searchTerm);
   }
 
+  searchLink() {
+    this.router.navigate(['minions/'+this.searchTerm])
+  }
 }
