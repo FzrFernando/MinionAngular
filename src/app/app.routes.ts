@@ -6,7 +6,14 @@ import { MinionsComponent } from './minions/minions.component';
 export const routes: Routes = [
     {path:'',component:WelcomeComponent},
     {path:'home',component:WelcomeComponent},
-    {path:'minions',component:MinionsComponent},
-    {path:'minions/:searchTerm',component:MinionsComponent},
-    {path:'minions/:name',component:InfoMinionComponent }
+    {path:'minions',component:MinionsComponent,
+        children: [
+            {path: 'info/:name', component: InfoMinionComponent}
+        ]
+    },
+    {path:'minions/:searchTerm',component:MinionsComponent,
+        children: [
+            {path: 'info/:name', component: InfoMinionComponent}
+        ]
+    }
 ];

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MinionService } from '../services/minion.service';
 import { CommonModule } from '@angular/common';
 import { Minion } from '../interfaces/minions';
@@ -9,7 +9,7 @@ import { Minion } from '../interfaces/minions';
   imports: [CommonModule],
   templateUrl: './info-minion.component.html'
 })
-export class InfoMinionComponent implements OnInit{
+export class InfoMinionComponent implements OnInit,OnChanges{
 
   @Input() name : string = '';
 
@@ -19,6 +19,10 @@ export class InfoMinionComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.minion = this.minionsService.getMinionByName(this.name);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.minion = this.minionsService.getMinionByName(this.name);
   }
 }
