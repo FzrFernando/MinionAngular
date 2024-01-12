@@ -16,18 +16,16 @@ export class MinionsComponent implements OnInit,OnChanges{
   @Input() mensaje!: string;
   @Output() eventoClic = new EventEmitter<void>();
   // @Input() minions: Minion[] = [];
-  minions: Minion[] = [];
+  minions : Minion[] = [];
   @Input() searchTerm: string = '';
 
   constructor(private minionsService: MinionService){
   }
 
-  ngOnInit(): void {
-    if (this.searchTerm){
-      this.minions = this.minionsService.getFilterMinions(this.searchTerm);
-    } else {
-      this.minions = this.minionsService.getMinions();
-    }
+  ngOnInit(){
+    this.minionsService.getMinions().subscribe({
+      next: (minions) => this.minions = minions
+    });
   }
 
   enviarEvento() {
@@ -35,10 +33,8 @@ export class MinionsComponent implements OnInit,OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.searchTerm){
-      this.minions = this.minionsService.getFilterMinions(this.searchTerm);
-    } else {
-      this.minions = this.minionsService.getMinions();
-    }
+    this.minionsService.getMinions().subscribe({
+      next: (minions) => this.minions = minions
+    });
   }
 }
