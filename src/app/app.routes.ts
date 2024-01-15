@@ -8,12 +8,12 @@ export const routes: Routes = [
     {path:'home',component:WelcomeComponent},
     {path:'minions',component:MinionsComponent,
         children: [
-            {path: 'info/:name', component: InfoMinionComponent}
+            {path: 'info/:id', component: InfoMinionComponent}
         ]
     },
     {path:'minions/:searchTerm',component:MinionsComponent,
         children: [
-            {path: 'info/:name', component: InfoMinionComponent}
+            {path: 'info/:id', component: InfoMinionComponent}
         ]
     }
 ];

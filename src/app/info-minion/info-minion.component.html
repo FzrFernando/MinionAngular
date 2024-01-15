@@ -1,5 +1,6 @@
+@if (minion){
 <div class="card" style="width: 18rem; ">
-    <img src="{{minion.img}}" style="width: 250px; height: 250px;" class="card-img-top" alt="{{minion.name}}">
+    <img src="{{'../../'+ minion.img }}" style="width: 250px; height: 250px;" class="card-img-top" alt="{{minion.name}}">
     <div class="card-body">
         <p class="card-text">{{minion.name}}</p>
         <p class="card-text">{{minion.bio}}</p>
@@ -15,3 +16,4 @@
         </svg>
     </div>
 </div>
+}

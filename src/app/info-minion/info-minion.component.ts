@@ -11,7 +11,7 @@ import { Minion } from '../interfaces/minions';
 })
 export class InfoMinionComponent implements OnInit,OnChanges{
 
-  @Input() name : string = '';
+  @Input() id : string = '';
 
   minion!: Minion;
 
@@ -19,10 +19,14 @@ export class InfoMinionComponent implements OnInit,OnChanges{
   }
 
   ngOnInit(): void {
-    this.minion = this.minionsService.getMinionByName(this.name);
+    this.minionsService.getMinion(this.id).subscribe({
+      next: (minion) => this.minion = minion
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.minion = this.minionsService.getMinionByName(this.name);
+    this.minionsService.getMinion(this.id).subscribe({
+      next: (minion) => this.minion = minion
+    });
   }
 }

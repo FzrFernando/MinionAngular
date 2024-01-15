@@ -26,7 +26,7 @@ export class MinionService {
     return this.minions.filter(minion => minion.name.toLowerCase().includes(term.toLowerCase()));
   }
   
-  getMinionByName(name : string): Minion{
-    return this.minions.filter(minion=> minion.name == name)[0];
+  getMinion(id : string): Observable<Minion>{
+    return this.http.get<Minion>(`${this.url}${id}`);
   }
 }
