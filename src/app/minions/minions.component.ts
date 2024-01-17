@@ -12,7 +12,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './minions.component.css'
 })
 export class MinionsComponent implements OnInit,OnChanges{
-  
+  error: boolean = false;
   @Input() mensaje!: string;
   @Output() eventoClic = new EventEmitter<void>();
   // @Input() minions: Minion[] = [];
@@ -24,7 +24,8 @@ export class MinionsComponent implements OnInit,OnChanges{
 
   ngOnInit(){
     this.minionsService.getMinions().subscribe({
-      next: (minions) => this.minions = minions
+      next: (minions) => this.minions = minions;
+      error: (error) =>
     });
   }
 
