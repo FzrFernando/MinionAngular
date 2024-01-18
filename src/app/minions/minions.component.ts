@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Minion } from '../interfaces/minions';
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule, JsonPipe } from '@angular/common';
 import { MinionService } from '../services/minion.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, catchError, ignoreElements, of } from 'rxjs';
 
 @Component({
   selector: 'app-minions',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, AsyncPipe],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, AsyncPipe, JsonPipe],
   templateUrl: './minions.component.html',
   styleUrl: './minions.component.css'
 })
@@ -18,6 +18,8 @@ export class MinionsComponent implements OnInit,OnChanges{
   @Output() eventoClic = new EventEmitter<void>();
   // @Input() minions: Minion[] = [];
   minions$! : Observable<Minion[]>;
+  minionError$!: Observable<any>;
+  errorMessage: any = null;
   @Input() searchTerm: string = '';
 
   constructor(private minionsService: MinionService){}
@@ -31,6 +33,10 @@ export class MinionsComponent implements OnInit,OnChanges{
     //   error: (error) => this.error = true
     // })
     this.minions$ = this.minionsService.getMinions();
+    this.minionError$ = this.minions$.pipe(
+      ignoreElements(),
+      catchError((err)=>of(err))
+    )
   }
 
   enviarEvento() {
