@@ -42,4 +42,8 @@ export class InfoMinionComponent implements OnInit,OnChanges{
   return(){
     this.router.navigate(['/minions'])
   }
+
+  edit(id: number) {
+    this.router.navigate(['edit',id])
+  }
 }

@@ -7,19 +7,17 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
   selector: 'app-navbar',
   standalone: true,
   imports: [FormsModule, RouterLink, RouterLinkActive],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
-  @Output() onSearch : EventEmitter<string> = new EventEmitter<string>();
-
-
+  // @Output() onSearch : EventEmitter<string> = new EventEmitter<string>();
 
   searchTerm: string = '';
   constructor(private minionService: MinionService, private router: Router){}
 
   search() {
-    this.onSearch.emit(this.searchTerm);
+    // this.onSearch.emit(this.searchTerm);
+    this.router.navigate(['search', this.searchTerm])
   }
 
   searchLink() {

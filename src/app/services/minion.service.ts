@@ -22,11 +22,21 @@ export class MinionService {
     return this.http.get<Minion[]>(this.url)
   }
 
-  getFilterMinions(term: string): Minion[]{
-    return this.minions.filter(minion => minion.name.toLowerCase().includes(term.toLowerCase()));
+  getFilterMinions(term: string): Observable<Minion[]>{
+    // return this.minions.filter(minion => minion.name.toLowerCase().includes(term.toLowerCase()));
+    return this.http.get<Minion[]>(`${this.url}?q=${term}`);
   }
   
   getMinion(id : number): Observable<Minion>{
     return this.http.get<Minion>(`${this.url}${id}`);
   }
+
+  addMinion(minion: Omit<Minion,'id'>): Observable<Minion>{
+    return this.http.post<Minion>(this.url,minion);
+  }
+
+  updateMinion(id: number,minion: Omit<Minion,'id'>): Observable<Minion>{
+    return this.http.put<Minion>(`${this.url}${id}`,minion);
+  }
+
 }
